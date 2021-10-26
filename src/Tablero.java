@@ -5,14 +5,14 @@ public class Tablero {
 	Casilla primero;
 	Casilla ultimo;
 	int count = 0;
-	
+	Random random;	
 	int m;
 	int n;
 	int s;
-	int e;
-	
+	int e;	
 	int e_id;
 	int s_id;
+	
 	
 	public Tablero(int m, int n, int s, int e) {	
 		this.m = m;
@@ -21,19 +21,9 @@ public class Tablero {
 		this.e = e;
 		e_id = 1;
 		s_id = -1;
-		count = m*n;		
+		count = m*n;
+		random = new Random();
 		CrearTablero(count);		
-	}
-	
-	
-	void insertar(Casilla c) {
-		if(primero == null) {
-			primero = c;
-			ultimo = c;
-		}else {
-			ultimo.siguiente = c;
-			ultimo = c;
-		}
 	}
 	
 	
@@ -45,19 +35,22 @@ public class Tablero {
 			CrearEscaleras(e);
 			CrearSerpientes(s);
 		}
-	}
+	}	
 	
 	
-	void Mostrar(Casilla c) {
-		System.out.println(c.index);
-		if(!c.equals(ultimo)) {
-			Mostrar(c.siguiente);
+	void insertar(Casilla c) {
+		if(primero == null) {
+			primero = c;
+			ultimo = c;
+		}else {
+			ultimo.siguiente = c;
+			ultimo = c;
 		}
-	}
+	}	
 	
-	int random() {
-		Random ran = new Random();
-		return 2 + ran.nextInt(count-2);
+	
+	int randomJusto() {
+		return 2 + random.nextInt(count-2);
 	}
 	
 	int fila(int x) {
@@ -68,24 +61,23 @@ public class Tablero {
 		if(c.index == index) {
 			return c;
 		}else {
-			getItem(c.siguiente, index);
+			return getItem(c.siguiente, index);
 		}
-		return primero;
 	}
 	
 	void CrearEscalera(Casilla c) {
 		if(c.equals(primero)) {			
-			Casilla x = getItem(primero, random());
+			Casilla x = getItem(primero, randomJusto());
 			if(x.avatar == 0) {
+				x.avatar = e_id;
 				CrearEscalera(x); 
 			}else {
 				CrearEscalera(primero);
 			}
 		}else {
-			Casilla x = getItem(primero, random());
+			Casilla x = getItem(primero, randomJusto());
 			if(x.avatar == 0 && fila(x.index) != fila(c.index)) {
 				x.avatar = e_id;
-				c.avatar = e_id;
 				e_id++;
 				if(c.index > x.index) {
 					x.salida = c;
@@ -100,19 +92,20 @@ public class Tablero {
 		}		
 	}
 	
+	
 	void CrearSerpiente(Casilla c) {
-		if(c.equals(primero)) {			
-			Casilla x = getItem(primero, random());
+		if(c.equals(primero)) {
+			Casilla x = getItem(primero, randomJusto());
 			if(x.avatar == 0) {
+				x.avatar = s_id;
 				CrearSerpiente(x); 
 			}else {
 				CrearSerpiente(primero);
 			}
 		}else {
-			Casilla x = getItem(primero, random());
+			Casilla x = getItem(primero, randomJusto());
 			if(x.avatar == 0 && fila(x.index) != fila(c.index)) {
 				x.avatar = s_id;
-				c.avatar = s_id;
 				s_id--;
 				if(c.index > x.index) {
 					c.salida = x;
@@ -127,6 +120,7 @@ public class Tablero {
 		}		
 	}
 	
+	
 	void CrearEscaleras(int n) {		
 		if(n > 0) {
 			CrearEscalera(primero);
@@ -139,6 +133,77 @@ public class Tablero {
 			CrearSerpiente(primero);
 			CrearSerpientes(n - 1);
 		}
+	}
+	
+	
+	String filaToString(int f, Casilla c, String s) {		
+		if(fila(c.index) == f) {
+			int digitosI = (""+count).length();
+			int digitosE = (""+e).length();
+			String celda = String.format("[%"+ digitosI +"d%"+digitosE+"s]", c.index, c.avatarToString());
+			if(f%2 != 0) {
+				s =  s + celda;
+			}else {
+				s = celda + s;
+			}
+		}		
+		if(!c.equals(ultimo)) {						
+			return filaToString(f, c.siguiente, s);
+		}else {
+			return s;
+		}
+	}
+	
+	
+	String filaJToString(int f, Jugadores j, Casilla c, String s) {		
+		if(fila(c.index) == f) {
+			int digitosE = (""+e).length();
+			int digitosJ = j.count;
+			String celda = String.format("[%"+ digitosE +"s"+"%" +digitosJ+"s]", c.avatarToString(), j.jugadoresEnCasilla(c));
+			if(f%2 != 0) {
+				s =  s + celda;
+			}else {
+				s = celda + s;
+			}
+		}		
+		if(!c.equals(ultimo)) {						
+			return filaJToString(f, j, c.siguiente, s);
+		}else {
+			return s;
+		}
+	}	
+	
+	
+	
+	String tableroToString(int f, String s) {
+		if(f > 0) {
+			s += filaToString(f, primero, "")+"\n";
+			return tableroToString(f-1, s);			
+		}else {
+			return s;
+		}				
+	}
+	
+	String tableroToString() {
+		return tableroToString(n, ""); 
+	}
+	
+	
+	String tableroToStringJ(int f, Jugadores j, String s) {
+		if(f > 0) {
+			s += filaJToString(f, j, primero, "")+"\n";
+			return tableroToStringJ(f-1, j, s);			
+		}else {
+			return s;
+		}				
+	}
+	
+	String tableroToStringJ(Jugadores j) {
+		return tableroToStringJ(n, j, "");
+	}
+	
+	boolean jugadorMeta(Jugador j) {
+		return j.casilla.equals(ultimo);
 	}
 	
 	

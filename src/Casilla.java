@@ -11,4 +11,17 @@ public class Casilla {
 		esEntrada = false;
 		avatar = 0;
 	}
+	
+	String avatarToString() {
+		if(avatar > 0) {
+			return ""+avatar;
+		}else {
+			if(avatar < 0) {
+				return ""+(char)(64-avatar);
+			}else {
+				return " ";
+			}
+		}
+	}
+	
 }
