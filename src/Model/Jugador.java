@@ -1,9 +1,10 @@
+package Model;
 
 public class Jugador {
 	Casilla casilla;
 	Jugador siguiente;
-	String avatar;
-	int movimientos;
+	public String avatar;
+	public int movimientos;
 	
 	Jugador(String avatar, Casilla casilla){
 		this.avatar = avatar;

@@ -1,10 +1,11 @@
+package Model;
 import java.util.Random;  
 
 public class Tablero {
 	
 	Casilla primero;
 	Casilla ultimo;
-	int count = 0;
+	public int count = 0;
 	Random random;	
 	int m;
 	int n;
@@ -155,7 +156,7 @@ public class Tablero {
 	}
 	
 	
-	String filaJToString(int f, Jugadores j, Casilla c, String s) {		
+	String filaToStringJ(int f, Jugadores j, Casilla c, String s) {		
 		if(fila(c.index) == f) {
 			int digitosE = (""+e).length();
 			int digitosJ = j.count;
@@ -167,7 +168,7 @@ public class Tablero {
 			}
 		}		
 		if(!c.equals(ultimo)) {						
-			return filaJToString(f, j, c.siguiente, s);
+			return filaToStringJ(f, j, c.siguiente, s);
 		}else {
 			return s;
 		}
@@ -191,7 +192,7 @@ public class Tablero {
 	
 	String tableroToStringJ(int f, Jugadores j, String s) {
 		if(f > 0) {
-			s += filaJToString(f, j, primero, "")+"\n";
+			s += filaToStringJ(f, j, primero, "")+"\n";
 			return tableroToStringJ(f-1, j, s);			
 		}else {
 			return s;

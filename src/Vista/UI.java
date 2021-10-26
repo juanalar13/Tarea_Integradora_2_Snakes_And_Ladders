@@ -1,6 +1,9 @@
+package Vista;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import Controlador.Control;
 
 
 public class UI {
@@ -14,12 +17,14 @@ public class UI {
 	
 	BufferedReader lector;
 	
-	UI(Control C){
+	public UI(Control C){
 		this.C = C;
 		lector = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
-	String leerEntrada() {
+	
+	String leerEntrada(String s) {
+		System.out.print(s);
 		try {
 			return lector.readLine();
 		} catch (IOException e) {
@@ -30,7 +35,7 @@ public class UI {
 	
 	void mostrarTablero() {
 		C.mostrarTablero();
-		leerEntrada();
+		leerEntrada("Salto de linea para Continuar: ");
 		mostrarTableroConJugadores();
 	}
 	
@@ -42,30 +47,38 @@ public class UI {
 	
 	
 	void rutinaComandos() {
-		String cmd = leerEntrada();
+		String cmd = leerEntrada("Salto de linea o comando[num simul menu] para continuar: ");
 		if(cmd.equals("")) {
-			C.avanzar();
-			rutinaComandos();
+			if(C.avanzar()) {
+				String nick = leerEntrada("Por favor ingrese el nick para el ganador: ");
+				C.registrarGanador(nick);
+				iniciar();
+			}else {
+				rutinaComandos();
+			}			
 		}
 		if(cmd.equals("num")) {
 			mostrarTablero();
 			rutinaComandos();
 		}
 		if(cmd.equals("simul")) {
-			C.avanzarConSimulacion();
-			rutinaComandos();
+			if(C.avanzarConSimulacion()) {
+				String nick = leerEntrada("Por favor ingrese el nick para el ganador: ");
+				C.registrarGanador(nick);
+				iniciar();
+			}else {
+				rutinaComandos();
+			}			
 		}
 		if(cmd.equals("menu")) {
 			iniciar();
-		}
-		
+		}		
 	}
 	
 	
 	
 	void crearJuego() {
-		System.out.print("\nIngrese los parametros del juego: ");
-		String cadena = leerEntrada();
+		String cadena = leerEntrada("\nIngrese los parametros del juego: ");
 		boolean exito = false;
 		try {
 			String[] items = cadena.split(" ");
@@ -91,21 +104,17 @@ public class UI {
 	}
 	
 	
-	void posiciones() {
-		
-	}
 	
 	
-	void iniciar() {		
+	public void iniciar() {		
 		System.out.println("\nSnakes and Ladders"); 
 		System.out.println("Menu");
 		System.out.println("1 -> Jugar");
 		System.out.println("2 -> Tablero de posiciones");
 		System.out.println("3 -> Salir");
-		System.out.print("Opcion: ");
 		int o = 0;
 		try {
-			o = Integer.parseInt(leerEntrada());			
+			o = Integer.parseInt(leerEntrada("Ingrese opcion: "));			
 		}catch (Exception e) {
 			o = 0;						
 		}
@@ -115,7 +124,9 @@ public class UI {
 			break;
 		}
 		case 2: {
-			posiciones();
+			C.mostrarPosiciones();
+			leerEntrada("Salto de linea para volver al menu: ");
+			iniciar();
 			break;
 		}
 		case 3: {

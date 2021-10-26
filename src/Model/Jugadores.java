@@ -1,3 +1,4 @@
+package Model;
 import java.util.Random;
 
 public class Jugadores {
@@ -9,7 +10,7 @@ public class Jugadores {
 	int count;
 	
 	Jugador actual;
-	Jugador ganador;
+	public Jugador ganador;
 	Random random;
 	
 	

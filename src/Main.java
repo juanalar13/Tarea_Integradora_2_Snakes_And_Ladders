@@ -1,22 +1,23 @@
+import Controlador.Control;
+import Vista.UI;
 
 public class Main {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		//Tablero t = new Tablero(6, 5, 2, 3);
-		//Jugadores g = new Jugadores("##$%&$", t.primero);
-		///Casilla c = t.getItem(t.primero, 5);
-		//System.out.print(c.index);
-		//t.CrearSerpiente(t.primero);
-		//t.Mostrar(t.primero);
-		//System.out.print(t.tableroToString());
-
-		//System.out.print(t.tableroToStringJ(g));
+	public static void main(String[] args) {		
+			
+		//Puntaje p1 = new Puntaje("lorenzo", "$", 7);
+		//Puntaje p2 = new Puntaje("zoil", "%", 1);
+		//Puntaje p3 = new Puntaje("carlos", "#", 9);
+		//Puntaje p4 = new Puntaje("diego", "&", 2);		
+		//Puntajes P = new Puntajes();		
+		//P.agregar(p1);		
+		//P.agregar(p2);		
+		//P.agregar(p3);
+		//P.agregar(p4);		
+		//P.MostrarInOrden();	
 		
 		Control c = new Control();
 		UI ui = new UI(c);
-		
 		ui.iniciar();
 
 	}
