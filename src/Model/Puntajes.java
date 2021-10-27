@@ -1,6 +1,4 @@
 package Model;
-
-
 // Clase para el Arbol de busqueda binaria
 public class Puntajes {
 	
@@ -45,7 +43,7 @@ public class Puntajes {
 	
 	
 	public void MostrarInOrden() {
-		System.out.println(String.format("\n%10s  %6s  %s", "Nick", "Avatar", "Puntaje"));
+		System.out.println(String.format("%10s  %6s  %s", "Nick", "Avatar", "Puntaje"));
 		if(raiz == null) {
 			System.out.println(String.format("........No hay puntajes......"));
 		}

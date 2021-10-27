@@ -1,7 +1,5 @@
 package Model;
 
-
-// Clase para el jugador (Clase para el Nodo de la lista Jugadores) 
 public class Jugador {
 	Casilla casilla;
 	Jugador siguiente;
@@ -30,11 +28,6 @@ public class Jugador {
 	void avanzar(int x, Tablero t) {
 		movimientos++;
 		_avanzar(x, t);	
-	}
-	
-	
-	boolean enMeta(Tablero t) {
-		return casilla.equals(t.ultimo);
 	}
 
 
