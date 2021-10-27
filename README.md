@@ -10,7 +10,7 @@ This project consists of creating the "Snakes And Ladders" videogame, using the 
 
 So far a hard job! ;)
 
-Here is a screenshot of the running game [board: 4x5, gamers: $#, ladders: 11 22 33, snakes: AA BB]:
+Here is a screenshot of the running game [board: 4x5, gamers: #$%, ladders: 11 22 33, snakes: AA BB]:
 ```
 [    ][3   ][    ][    ][    ]
 [2  $][A   ][B   ][    ][3   ]
