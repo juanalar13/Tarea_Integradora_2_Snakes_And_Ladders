@@ -30,7 +30,7 @@ public class Tablero {
 	
 	void CrearTablero(int n) {		
 		if(n > 0) {
-			insertar(new Casilla(count-n+1));
+			agregar(new Casilla(count-n+1));
 			CrearTablero(n - 1);
 		}else {
 			CrearEscaleras(e);
@@ -39,7 +39,7 @@ public class Tablero {
 	}	
 	
 	
-	void insertar(Casilla c) {
+	void agregar(Casilla c) {
 		if(primero == null) {
 			primero = c;
 			ultimo = c;
@@ -49,11 +49,12 @@ public class Tablero {
 		}
 	}	
 	
-	
+	// Genera un numero aleatorio en [2, count-1]
 	int randomJusto() {
 		return 2 + random.nextInt(count-2);
 	}
 	
+	// Retorna la fila a partir del index x de una casilla
 	int fila(int x) {
 		return 1 + (x-1)/m;
 	}
@@ -203,8 +204,13 @@ public class Tablero {
 		return tableroToStringJ(n, j, "");
 	}
 	
-	boolean jugadorMeta(Jugador j) {
-		return j.casilla.equals(ultimo);
+	
+	void mostrarTablero() {
+		System.out.println(tableroToString());
+	}
+	
+	void mostrarTableroJ(Jugadores j) {
+		System.out.println(tableroToStringJ(j));
 	}
 	
 	
