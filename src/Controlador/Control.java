@@ -3,6 +3,8 @@ import Model.Juego;
 import Model.Puntaje;
 import Model.Puntajes;
 
+
+// Clase para el controlador, el mediador entre la UI y el modelo
 public class Control {
 	
 	Puntajes P = new Puntajes();	

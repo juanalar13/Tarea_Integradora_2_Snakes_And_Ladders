@@ -1,5 +1,7 @@
 package Model;
 
+
+// Clase para el Juego
 public class Juego {
 	
 	public Tablero tablero;
@@ -12,11 +14,11 @@ public class Juego {
 	}	
 	
 	public void mostrarTablero() {
-		System.out.println(tablero.tableroToString());
+		tablero.mostrarTablero();
 	}
 	
 	public void mostrarTableroJ() {
-		System.out.println(tablero.tableroToStringJ(jugadores));
+		tablero.mostrarTableroJ(jugadores);
 	}
 	
 	public boolean avanzar() {
