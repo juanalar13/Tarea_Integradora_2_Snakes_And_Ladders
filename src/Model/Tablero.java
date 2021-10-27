@@ -1,6 +1,9 @@
 package Model;
 import java.util.Random;  
 
+
+// Clase para el Tablero (Lista de Casillas)
+
 public class Tablero {
 	
 	Casilla primero;
