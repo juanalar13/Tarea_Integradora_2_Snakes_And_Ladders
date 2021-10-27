@@ -2,6 +2,9 @@ import Controlador.Control;
 import Vista.UI;
 
 public class Main {
+	
+	static Control c;
+	static UI ui;
 
 	public static void main(String[] args) {		
 			
@@ -16,8 +19,8 @@ public class Main {
 		//P.agregar(p4);		
 		//P.MostrarInOrden();	
 		
-		Control c = new Control();
-		UI ui = new UI(c);
+		c = new Control();
+		ui = new UI(c);
 		ui.iniciar();
 
 	}
