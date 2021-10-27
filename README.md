@@ -1,8 +1,22 @@
-# Tarea_Integradora_2_Snakes_And_Ladders
+# Tarea Integradora 2 (Snakes And Ladders)
 
-This project consists of creating the Snakes And Ladders video game in Console mode, using the Eclipse (Java) development environment, using recursive programming, MVC architecture (see src folder), no arrangements, only linked lists, so it was a tedious job .
+This project consists of creating the "Snakes And Ladders" videogame, using the Eclipse IDE (Java), with the next characteristics:
 
-In the docs folder you will find the documents such as the functional requirements and the class diagram including the packages.
+- Console mode
+- Recursive programming
+- MVC architecture (see ```src``` folder)
+- With Lists and Trees
+- Without arrays or similar structures (ArrayList, Collections, etc.)
+
+So far a hard job! ;)
+
+Here is a screenshot of the running game [board: 4x5, gamers: $#, ladders: 11 22 33, snakes: AA BB]:
+```
+[    ][3   ][    ][    ][    ]
+[2  $][A   ][B   ][    ][3   ]
+[    ][B   ][    ][    ][1   ]
+[   %][A  #][2   ][1   ][    ]
+```
+In the folder ```docs``` you will find the documents that support the [specification of requirements](docs/REQUERIMIENTOS_FUNCIONALES.pdf) and the [class diagram](docs/ClassDiagram.pdf) including the packages (MVC).
 
 Enjoy!
- 

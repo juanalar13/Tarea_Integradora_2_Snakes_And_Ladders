@@ -1,7 +1,5 @@
 package Model;
-import java.util.Random; 
-
-//dsdsdsassaasas
+import java.util.Random;  
 
 public class Tablero {
 	
@@ -9,15 +7,15 @@ public class Tablero {
 	Casilla ultimo;
 	public int count = 0;
 	Random random;	
-	int m;
 	int n;
+	int m;
 	int s;
 	int e;	
 	int e_id;
 	int s_id;
 	
 	
-	public Tablero(int m, int n, int s, int e) {	
+	public Tablero(int m, int n, int s, int e) {
 		this.m = m;
 		this.n = n;
 		this.s = s;
@@ -32,7 +30,7 @@ public class Tablero {
 	
 	void CrearTablero(int n) {		
 		if(n > 0) {
-			insertar(new Casilla(count-n+1));
+			agregar(new Casilla(count-n+1));
 			CrearTablero(n - 1);
 		}else {
 			CrearEscaleras(e);
@@ -41,7 +39,7 @@ public class Tablero {
 	}	
 	
 	
-	void insertar(Casilla c) {
+	void agregar(Casilla c) {
 		if(primero == null) {
 			primero = c;
 			ultimo = c;
@@ -51,13 +49,14 @@ public class Tablero {
 		}
 	}	
 	
-	
+	// Genera un numero aleatorio en [2, count-1]
 	int randomJusto() {
 		return 2 + random.nextInt(count-2);
 	}
 	
+	// Retorna la fila a partir del index x de una casilla
 	int fila(int x) {
-		return 1 + (x-1)/m;
+		return 1 + (x-1)/n;
 	}
 	
 	Casilla getItem(Casilla c, int index) {
@@ -188,7 +187,7 @@ public class Tablero {
 	}
 	
 	String tableroToString() {
-		return tableroToString(n, ""); 
+		return tableroToString(m, ""); 
 	}
 	
 	
@@ -202,11 +201,16 @@ public class Tablero {
 	}
 	
 	String tableroToStringJ(Jugadores j) {
-		return tableroToStringJ(n, j, "");
+		return tableroToStringJ(m, j, "");
 	}
 	
-	boolean jugadorMeta(Jugador j) {
-		return j.casilla.equals(ultimo);
+	
+	void mostrarTablero() {
+		System.out.println(tableroToString());
+	}
+	
+	void mostrarTableroJ(Jugadores j) {
+		System.out.println(tableroToStringJ(j));
 	}
 	
 	
