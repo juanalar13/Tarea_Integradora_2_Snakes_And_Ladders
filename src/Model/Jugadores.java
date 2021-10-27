@@ -1,8 +1,6 @@
 package Model;
 import java.util.Random;
 
-
-// Clase para los Jugadores (lista)
 public class Jugadores {
 	
 	Jugador primero;
@@ -35,13 +33,13 @@ public class Jugadores {
 		}else {
 			ultimo.siguiente = g;
 			ultimo = g;
-			ultimo.siguiente = primero; // permite el bucle de turnos
+			ultimo.siguiente = primero; // para el bucle
 		}
 		count++;
 	}
 	
 	
-	boolean existeJugador(String a, Jugador g) {
+	boolean estaJugador(String a, Jugador g) {
 		if(count == 0) {
 			return false;
 		}else {
@@ -55,7 +53,7 @@ public class Jugadores {
 				if(g.avatar.equals(a)) {
 					return true;
 				}else {
-					return existeJugador(a, g.siguiente);
+					return estaJugador(a, g.siguiente);
 				}
 			}
 		}		
@@ -65,7 +63,7 @@ public class Jugadores {
 	void CrearJugadores(int n) {		
 		if(n > 0) {
 			String a = ""+p.charAt(p.length()-n);
-			if(!existeJugador(a, primero)) {
+			if(!estaJugador(a, primero)) {
 				insertar(new Jugador(a, primerCasilla));
 			}			
 			CrearJugadores(n - 1);
@@ -96,14 +94,14 @@ public class Jugadores {
 		int x = 1+random.nextInt(6);
 		System.out.println("El jugador " + actual.avatar + " ha lanzado el dado y obtuvo el puntaje " + x);
 		actual.avanzar(x, t);
-		if(actual.enMeta(t)) {
+		if(actual.casilla.equals(t.ultimo)) {
 			System.out.println("El jugador " + actual.avatar + " ha ganado el juego, con " + actual.movimientos + " movimientos");
 			ganador = actual;
-			t.mostrarTableroJ(this);
+			System.out.println(t.tableroToStringJ(this));
 			return true;
 		}else {			
 			actual = actual.siguiente;
-			t.mostrarTableroJ(this);
+			System.out.println(t.tableroToStringJ(this));
 			return false;
 		}
 	}
